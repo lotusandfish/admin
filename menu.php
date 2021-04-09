@@ -78,21 +78,15 @@ body {
 <body>
 
 <div class="topnav">
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
+  <a href="product.php">Product</a>
+  <a href="category.php">Category</a>
+  <a href="order.php">Order</a
   <div class="search-container">
-    <form action="/action_page.php">
+    <form method="post">
       <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
+      <button type="submit" name="btn_search" ><i class="fa fa-search"></i></button>
     </form>
   </div>
 </div>
-
-<div style="padding-left:16px">
-  <h2>Responsive Search Bar</h2>
-  <p>Navigation bar with a search box and a submit button inside of it.</p>
-  <p>Resize the browser window to see the responsive effect.</p>
-</div>
-
 </body>
 </html>
