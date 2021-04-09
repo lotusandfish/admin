@@ -1,26 +1,22 @@
 <?php 
     include("menu.php");
-    function function_alert($message){ 
+    function function_alert($message) { 
          // Display the alert box  
         echo "<script>alert('$message');</script>"; 
-    } 
-    $sql = "SELECT * FROM product";
-    $query = pg_query($conn,$sql);
-    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    }
 
 // Click Del icon
-if(isset($_GET['del'])){
+if(isset($_GET['del'])){ 
   $id = $_GET['del'];
   $sql = "DELETE FROM product WHERE product_id = $id";
   if($query = pg_query($conn, $sql)){
-
+    
     function_alert('Deleted success fully!');
 
-     header( "refresh:3;url=product.php");
+    header('location:product.php');
   }
 }
 
-      
 
 //Click Add
 if(isset($_POST['add'])){
@@ -28,15 +24,15 @@ if(isset($_POST['add'])){
       $time     =  date("Y-m-d"); 
       $price    =  $_POST['price'];
       $cat      =  $_POST['cat_name'];
-      $file1    =  $_FILES['img'];
+      $file1    =  $_FILES['Img'];
       $img      =  $file1['name'];
       $des      =  $_POST['des'];
       $supplier =  $_POST['supplier'];
       move_uploaded_file($file1['tmp_name'], "images/".$img);
       $sql= "INSERT INTO product (image, description, price, supplier, date_modified, cat_name, product_name) VALUES('$img', '$des', $price, '$supplier', '$time', '$cat', '$toyName')";
       if ($query = pg_query($conn, $sql)) {
+        header("location:product.php");
         function_alert('Added! success fully!');
-        header("location:product.php");   
       }
       else{
         echo '<script language="javascript">Error</script>';
@@ -78,14 +74,14 @@ if(isset($_POST['add'])){
         <?php while ($item = pg_fetch_array($query)){ ?>
         <tr>
           <th scope="row"><?= $item['product_id'] ?></th>
-          <td><img style="width: 90px; height: 90px;" title="<?= $item['product_name']  ?>" src="images/<?= $item['image'] ?>"></td>
+          <td><img style="width: 180px; height: 180px;" title="<?= $item['product_name']  ?>" src="images/<?= $item['image'] ?>"></td>
           <td><?=   $item['product_name']   ?></td>
           <td><?=   $item['supplier']       ?></td>
           <td><?=   $item['cat_name']       ?></td>
           <td><?=   $item['description']    ?></td>
           <td><?= number_format($item['price'],2) ?> $</td>
           <td><?= $item['date_modified'] ?></td>
-          <td style="text-align: center;"><a href="updateproduct.php?edit=<?= $item['product_id'] ?>"><span style="font-size: 20px;"><i style="color:#FF0094 ; " class="far fa-edit"></i></span></a></td>
+          <td style="text-align: center;"><a href="product.php?edit=<?= $item['product_id'] ?>"><span style="font-size: 20px;"><i style="color:#FF0094 ; " class="far fa-edit"></i></span></a></td>
           <td style="text-align: center;"><a href="product.php?del=<?= $item['product_id'] ?>"><span style="font-size: 20px;"><i style="color:#FF0094 ; " class="far fa-trash-alt"></i></span></a></td>
         </tr>
         <?php } ?>       
@@ -105,7 +101,7 @@ if(isset($_POST['add'])){
         <select name="cat_name" style="width: 30%; color:#FF0094; background:#343A40; ">
 
           <?php 
-            $sql1 = "SELECT * FROM category ORDER BY catName DESC";
+            $sql1 = "SELECT * FROM category";
             $query1 = pg_query($conn, $sql1);
             while($option = pg_fetch_array($query1)){
           ?>
@@ -115,10 +111,10 @@ if(isset($_POST['add'])){
         </select><br>
 
         <label>Price :</label>
-        <input type="text" name="price" pattern="[0-9]+" title="please enter number only" max="999" min="0" required="required"><br>
+        <input type="text" name="price" pattern="[0-9]+" title="please enter number only" max="999" min="1" required="required"><br>
 
         <label>Description :</label>
-        <textarea name="des"></textarea><br>
+        <textarea name="des" cols="30"></textarea><br>
 
         <input style="width: 20%; margin: 10px;" type="submit" name="add" value="Add Song">
       </form>
