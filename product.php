@@ -1,5 +1,9 @@
 <?php 
     include("menu.php");
+    function function_alert($message){ 
+         // Display the alert box  
+        echo "<script>alert('$message');</script>"; 
+    } 
     $sql = "SELECT * FROM product";
     $query = pg_query($conn,$sql);
     date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -8,15 +12,11 @@
 if(isset($_GET['del'])){
   $id = $_GET['del'];
   $sql = "DELETE FROM product WHERE product_id = $id";
-  if($query = mysqli_query($conn, $sql)){
+  if($query = pg_query($conn, $sql)){
 
-    function function_alert($message) { 
-         // Display the alert box  
-        echo "<script>alert('$message');</script>"; 
-      } 
     function_alert('Deleted success fully!');
 
-     header('location:product.php');
+     header( "refresh:3;url=product.php");
   }
 }
 
@@ -35,13 +35,8 @@ if(isset($_POST['add'])){
       move_uploaded_file($file1['tmp_name'], "images/".$img);
       $sql= "INSERT INTO product (image, description, price, supplier, date_modified, cat_name, product_name) VALUES('$img', '$des', $price, '$supplier', '$time', '$cat', '$toyName')";
       if ($query = pg_query($conn, $sql)) {
-        
-        header("location:product.php");
-        function function_alert($message) { 
-              // Display the alert box  
-              echo "<script>alert('$message');</script>"; 
-        } 
-            function_alert('Added! success fully!');
+        function_alert('Added! success fully!');
+        header("location:product.php");   
       }
       else{
         echo '<script language="javascript">Error</script>';
@@ -111,8 +106,8 @@ if(isset($_POST['add'])){
 
           <?php 
             $sql1 = "SELECT * FROM category ORDER BY catName DESC";
-            $query1 = mysqli_query($conn, $sql1);
-            while($option = mysqli_fetch_array($query1)){
+            $query1 = pg_query($conn, $sql1);
+            while($option = pg_fetch_array($query1)){
           ?>
           <option value="<?= $option['cat_name'] ?>"><?= $option['cat_name'] ?></option>
           <?php } ?>
