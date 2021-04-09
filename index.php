@@ -3,7 +3,7 @@
     if (isset($_POST['login'])) {
         $name  = $_POST['uname'];
         $pass  = $_POST['psw'];
-        $query = pg_query($conn, "SELECT * FROM account WHERE user_name = '$uname' AND password = '$pass'");
+        $query = pg_query($conn, "SELECT * FROM account WHERE user_name = '$name' AND password = '$pass'");
         $row = pg_num_rows($query);
         if ($row > 0){
             header("location:product.php");
