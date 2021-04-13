@@ -77,7 +77,7 @@ if(isset($_POST['add'])){
         ?>
         <tr>
           <th scope="row"><?= $item['product_id'] ?></th>
-          <td><img style="width: 180px; height: 180px;" title="<?= $item['product_name']  ?>" src="images/<?= $item['image'] ?>"></td>
+          <td><img style="width: 120px; height: 120px;" title="<?= $item['product_name']  ?>" src="images/<?= $item['image'] ?>"></td>
           <td><?=   $item['product_name']   ?></td>
           <td><?=   $item['supplier']       ?></td>
           <td><?=   $item['cat_name']       ?></td>
