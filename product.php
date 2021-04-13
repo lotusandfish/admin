@@ -71,7 +71,10 @@ if(isset($_POST['add'])){
       </tr>
     </thead>
     <tbody>
-        <?php while ($item = pg_fetch_array($query)){ ?>
+        <?php
+            $query = pg_query($conn, "SELECT * FROM product");
+            while ($item = pg_fetch_array($query)){ 
+        ?>
         <tr>
           <th scope="row"><?= $item['product_id'] ?></th>
           <td><img style="width: 180px; height: 180px;" title="<?= $item['product_name']  ?>" src="images/<?= $item['image'] ?>"></td>
