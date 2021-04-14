@@ -5,7 +5,7 @@
   $row = pg_fetch_array($query);
 
   if(isset($_POST['update'])){
-    $id = $_GET['edit'];
+    $id       = $_GET['edit'];
     $toyName  =  $_POST['product_name'];
     $time     =  date("Y-m-d"); 
     $price    =  $_POST['price'];
@@ -15,7 +15,7 @@
     $des      =  $_POST['des'];
     $supplier =  $_POST['supplier'];
     move_uploaded_file($file1['tmp_name'], "images/".$img);
-    $sql= " UPDATE product SET image='$img', description='$des', price=$price, supplier='$supplier', date_modified='$time', cat_name='$cat', ='$toyName' WHERE product_id=$id";
+    $sql= " UPDATE product SET image='$img', description='$des', price=$price, supplier='$supplier', date_modified='$time', cat_name='$cat', product_name='$toyName' WHERE product_id=$id";
     if ($query = pg_query($conn, $sql)) {
       header("location:product.php");
       function_alert('Added! success fully!');
@@ -42,7 +42,7 @@
             $query1 = pg_query($conn, $sql1);
             while($option = pg_fetch_array($query1)){
           ?>
-          <option value="<?= $option['cat_name'] ?>"><?php echo $row['cat_name']; ?></option>
+          <option value="<?= $option['cat_name'] ?>"></option>
           <?php } ?>
 
         </select><br>
