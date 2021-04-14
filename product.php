@@ -84,7 +84,7 @@ if(isset($_POST['add'])){
           <td><?=   $item['description']    ?></td>
           <td><?= number_format($item['price'],2) ?> $</td>
           <td><?= $item['date_modified'] ?></td>
-          <td style="text-align: center;"><a href="product.php?edit=<?= $item['product_id'] ?>"><span style="font-size: 20px;"><i style="color:#FF0094 ; " class="far fa-edit"></i></span></a></td>
+          <td style="text-align: center;"><a href="updatepd.php?edit=<?= $item['product_id'] ?>"><span style="font-size: 20px;"><i style="color:#FF0094 ; " class="far fa-edit"></i></span></a></td>
           <td style="text-align: center;"><a href="product.php?del=<?= $item['product_id'] ?>"><span style="font-size: 20px;"><i style="color:#FF0094 ; " class="far fa-trash-alt"></i></span></a></td>
         </tr>
         <?php } ?>       
