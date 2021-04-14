@@ -1,6 +1,6 @@
 <?php 
 	include('menu.php');
-	$query = pg_query("SELECT * FROM orders");
+	$query = pg_query($conn,"SELECT * FROM orders");
 ?>
 <style type="text/css">
   th, tr{
