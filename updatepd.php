@@ -35,7 +35,7 @@
         <input name="Img" type="file"><br>
 
         <label>Category :</label>
-        <select name="cat_name" style="width: 30%; color:#FF0094; background:#343A40;">
+        <select name="cat_name" style="width: 30%">
 
           <?php 
             $sql1 = "SELECT * FROM category";
